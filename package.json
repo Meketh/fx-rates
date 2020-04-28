@@ -4,7 +4,7 @@
     "build:client": "parcel build src/public/**/*.html -d dist/public",
     "build:server": "parcel build -t node src/server.ts",
     "build": "run-s -l clear; run-p -l build:*",
-    "start": "run-s build; sh ./wait-for.sh -f dist/server.js -- node",
+    "start": "node dist/server.js",
     "dev:client": "parcel serve src/public/**/*.html -d dist/public",
     "dev:server": "parcel watch -t node src/server.ts",
     "dev:serve": "sh ./wait-for.sh -f dist/server.js -- node-dev --respawn",
