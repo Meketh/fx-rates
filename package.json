@@ -1,0 +1,39 @@
+{
+  "scripts": {
+    "clear": "rm -rf dist",
+    "build:client": "parcel build src/public/**/*.html -d dist/public",
+    "build:server": "parcel build -t node src/server.ts",
+    "build": "run-s -l clear; run-p -l build:*",
+    "start": "run-s build; sh ./wait-for.sh -f dist/server.js -- node",
+    "dev:client": "parcel serve src/public/**/*.html -d dist/public",
+    "dev:server": "parcel watch -t node src/server.ts",
+    "dev:serve": "sh ./wait-for.sh -f dist/server.js -- node-dev --respawn",
+    "dev": "run-s -l clear; run-p -l dev:*"
+  },
+  "dependencies": {
+    "@hapi/good": "^9.0.0",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.0.0",
+    "axios": "^0.19.2",
+    "hapi-swagger": "^13.0.0",
+    "mongodb": "^3.5.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/hapi__hapi": "^19.0.3",
+    "@types/hapi__inert": "^5.2.0",
+    "@types/hapi__joi": "^16.0.12",
+    "@types/hapi__vision": "^5.5.1",
+    "@types/mongodb": "^3.5.14",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "node-dev": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.8.3"
+  }
+}

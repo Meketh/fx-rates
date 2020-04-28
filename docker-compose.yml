@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+    networks:
+      - app-network
+    depends_on:
+      - db
+    command: sh ./wait-for.sh db:27017 -- npm run dev
+
+  db:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - ./mongo.entrypoint.js:/docker-entrypoint-initdb.d/entrypoint.js:ro
+      - mongodb:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb:
